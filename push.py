@@ -7,6 +7,7 @@ from slack.errors import SlackApiError
 
 slack_token = os.environ['SLACK_API_TOKEN']
 slack_channel = os.environ['SLACK_CHANNEL_ID']
+
 client = WebClient(token=slack_token)
 
 
