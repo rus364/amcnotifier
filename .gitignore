@@ -1,4 +1,5 @@
 .idea
+__pycache__
 venv
-amcnotifier.iml
+mcnotifier.iml
 state.db
