@@ -6,14 +6,14 @@ from datetime import datetime
 
 def get_one(calls_query, calls_group):
 
-    last_calldate = str()
+    last_calldate = ''
     last_src = None
     last_uniqueid = None
 
     answered_store = []
-    dstchannel_store = str()
+    dstchannel_store = ''
 
-    call_status = str()
+    call_status = ''
 
     for (calldate, src, clid, dst, uniqueid, dstchannel, disposition) in calls_query:
         if dst == calls_group:
@@ -40,18 +40,20 @@ def get_one(calls_query, calls_group):
     return call_status
 
 
-def get_common(calls_query, first_group):
+def get_common(calls_query, first_group, statistics=False):
 
-    last_calldate = str()
+    last_calldate = ''
     last_src = None
     last_uniqueid = None
-    last_dstchannel = str()
+    last_dstchannel = ''
 
     answered_store = []
     dst_store = []
-    dstchannel_store = str()
+    dstchannel_store = ''
 
-    call_status = str()
+    call_status = ''
+    heroes = []
+    answered_statistics = ''
 
     for (calldate, src, clid, dst, uniqueid, dstchannel, disposition) in calls_query:
         if uniqueid == last_uniqueid or last_uniqueid is None:
@@ -70,6 +72,7 @@ def get_common(calls_query, first_group):
                 re.findall(r'/(\d+)', last_dstchannel)[0], dstchannel_store)
             answered_store = [disposition]
             dst_store = [dst]
+            heroes.extend([re.findall(r'/(\d+)', last_dstchannel)[0]])
             dstchannel_store = re.findall(r'/(\d+)', dstchannel)[0] + ' > '
 
         last_calldate = datetime.strptime(str(calldate), '%Y-%m-%d %H:%M:%S')
@@ -84,5 +87,13 @@ def get_common(calls_query, first_group):
         call_status += '\n' + '{} - *{}* was answered by *{}*! {} :heavy_check_mark:'.format(
             last_calldate.time(), last_src,
             re.findall(r'/(\d+)', last_dstchannel)[0], dstchannel_store)
+        heroes.extend([re.findall(r'/(\d+)', last_dstchannel)[0]])
 
-    return call_status
+    answered_statistics_store = dict((i, heroes.count(i)) for i in heroes)
+    for i in answered_statistics_store:
+        answered_statistics += '\n' + '{} answered {} calls!'.format(i, answered_statistics_store.get(i))
+
+    if statistics:
+        return answered_statistics
+    else:
+        return call_status

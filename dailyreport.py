@@ -30,8 +30,10 @@ sqlite_conn.close()
 # push statistics to Slack
 support_status = sampling.get_one(calls, main_group)
 common_status = sampling.get_common(calls, main_group)
+answered_statistics = sampling.get_common(calls, main_group, statistics=True)
 if support_status != '':
-    push.post('Missed call statistics :nyancat_big:',
-              'Technical support:', support_status,
-              'Common:', common_status
-              )
+    push.post_daily('Missed call statistics for today :meow_party:',
+                    'Technical support:', support_status,
+                    'Common:', common_status,
+                    'Statistics:', answered_statistics
+                    )
