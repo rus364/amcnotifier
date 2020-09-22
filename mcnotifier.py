@@ -60,7 +60,7 @@ if not last_stored_id:
 mariadb_cursor.execute(
     f"""SELECT DISTINCT calldate,src,clid,dst,uniqueid,dstchannel,disposition
     FROM cdr
-    WHERE calldate LIKE '2020-09-09%'
+    WHERE calldate LIKE '{date.today()}%'
         AND (dst='{main_group}' {personal_numbers} OR dst='{next_group}')
         AND uniqueid > '{last_stored_id[0]}'
     ORDER BY calldate;"""
