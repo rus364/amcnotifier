@@ -111,7 +111,7 @@ def get_common(calls_query, first_group, statistics=False):
 
     answered_statistics_store = dict((i, heroes.count(i)) for i in heroes)
     for i in answered_statistics_store:
-        answered_statistics += '\n' + '{} answered {} calls!'.format(i, answered_statistics_store.get(i))
+        answered_statistics += '\n' + '*{}* answered *{}* calls!'.format(i, answered_statistics_store.get(i))
 
     if statistics:
         return answered_statistics
