@@ -98,6 +98,6 @@ for number in personal_numbers_list:
 
 if one:
     push.post('Unanswered call statistics :nyancat_big:',
-              'Technical support:', support_status,
-              'Common:', common_status
+              'Technical support:', one,
+              'Common:', common
               )
