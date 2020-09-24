@@ -31,7 +31,8 @@ try:
         port=3306,
         database=db,
         user=dbuser,
-        password=dbpass
+        password=dbpass,
+        charset='utf8'
     )
 except MySQLdb.Error as e:
     print(f'Error connecting to MariaDB: {e}')
