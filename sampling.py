@@ -85,7 +85,7 @@ def get_common(calls_query, first_group, statistics=False):
                 hero, dstchannel_store)
             answered_store = [disposition]
             dst_store = [dst]
-            heroes.extend([last_dstchannel])
+            heroes.extend([hero])
             dstchannel_store = dstchannel + ' > '
         else:
             answered_store = [disposition]
@@ -107,7 +107,7 @@ def get_common(calls_query, first_group, statistics=False):
         call_status += '\n' + '{} - *{}* was answered by *{}*! {} :heavy_check_mark:'.format(
             last_calldate.time(), last_src,
             hero, dstchannel_store)
-        heroes.extend([last_dstchannel])
+        heroes.extend([hero])
 
     answered_statistics_store = dict((i, heroes.count(i)) for i in heroes)
     for i in answered_statistics_store:
