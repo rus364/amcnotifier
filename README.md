@@ -22,6 +22,6 @@ The script takes 5 arguments:
 
 Also, you can add dailyreport.py to cron for the daily full reports.
 
-Just a simple:
+Just an example:
 
 `00 18 * * * . ~/.bash_profile ; cd /opt/mcnotifier && ./dailyreport.py 666 >/tmp/amcnotifier.log 2>&1`
